@@ -1,0 +1,86 @@
+{
+  "name": "first-utility-website",
+  "version": "0.0.1",
+  "private": true,
+  "main": "build/server/index.js",
+  "scripts": {
+    "clean:all": "npm run clean && rm -rf node_modules",
+    "clean": "rm -rf build",
+    "start": "NODE_PATH=build node --stack_trace_limit=200 build/server",
+    "start:dev": "npm run watch:server",
+    "test": "parallelshell 'npm run test:unit' 'npm run test:integration' 'npm run test:functional'",
+    "test:unit": "NODE_PATH=./src mocha 'test/unit/**/*.js' --require babel-core/register --require test/support/global",
+    "test:integration": "DEBUG=nock.* NODE_PATH=./src mocha test/integration/* --require babel-core/register --require test/support/global",
+    "test:functional": "NODE_PATH=./src selenium-standalone install && parallelshell 'selenium-standalone start' 'node --require babel-core/register node_modules/.bin/cucumberjs test/functional/features'",
+    "test:functional-wip": "NODE_PATH=./src selenium-standalone install && parallelshell 'selenium-standalone start' 'node --require babel-core/register node_modules/.bin/cucumberjs --tags @wip test/functional/features'",
+    "cover": "NODE_PATH=./src istanbul cover _mocha -- 'test/unit/**/*.js'  --require babel-core/register --require test/support/global",
+    "lint": "NODE_PATH=./src eslint --ext .jsx --ext .js ./src",
+    "commit": "parallelshell 'npm run test' 'npm run lint' 'npm run cover'"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.7.4",
+    "body-parser": "^1.15.0",
+    "cookie-parser": "^1.4.1",
+    "express": "4.13.4",
+    "lodash": "4.4.0",
+    "moment": "^2.12.0",
+    "react": "0.14.8",
+    "react-dom": "0.14.8",
+    "superagent": "1.7.2",
+    "uid": "0.0.2",
+    "url": "0.10.0",
+  },
+  "devDependencies": {
+    "babel-cli": "6.2.0",
+    "babel-core": "6.2.0",
+    "babel-eslint": "4.1.8",
+    "babel-plugin-add-module-exports": "0.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.5.0",
+    "babel-preset-es2015": "6.1.18",
+    "babel-preset-react": "6.1.18",
+    "babel-runtime": "6.2.0",
+    "babelify": "7.2.0",
+    "browserify": "12.0.1",
+    "chai": "3.4.1",
+    "chai-enzyme": "^0.4.1",
+    "chai-subset": "1.2.0",
+    "cucumber": "0.9.1",
+    "dotenv": "^2.0.0",
+    "enzyme": "1.5.0",
+    "eslint": "1.10.3",
+    "eslint-config-airbnb": "5.0.0",
+    "eslint-config-first-utility": "1.0.0",
+    "eslint-plugin-react": "3.16.1",
+    "exorcist": "0.4.0",
+    "istanbul": "1.0.0-alpha.2",
+    "jsdom": "8.0.2",
+    "mocha": "2.3.4",
+    "nock": "7.0.2",
+    "node-sass": "3.4.2",
+    "nodemon": "1.8.1",
+    "parallelshell": "2.0.0",
+    "postcss-cli": "^2.5.1",
+    "react-addons-test-utils": "0.14.8",
+    "react-context": "0.0.3",
+    "selenium-standalone": "4.9.0",
+    "sinon": "1.17.3",
+    "supertest": "1.1.0",
+    "susy": "2.2.9",
+    "svg-sprite": "^1.2.19",
+    "uglify-js": "2.6.1",
+    "webdriverio": "3.4.0"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "react",
+            "es2015"
+          ]
+        }
+      ]
+    ]
+  }
+}

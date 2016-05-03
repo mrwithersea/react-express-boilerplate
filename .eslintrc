@@ -1,0 +1,25 @@
+{
+    "extends": [
+        "airbnb",
+        "first-utility"
+    ],
+    "rules": {
+        "indent": [0],
+        "react/jsx-indent-props": [2, 4],
+        "space-before-function-paren": [0],
+        "no-unused-vars": [2, {"varsIgnorePattern": "[rR]eact" }]
+    },
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true
+    },
+    "ecmaFeatures": {
+        "jsx": true,
+        "experimentalObjectRestSpread": true,
+        "modules" : true
+    },
+    "plugins": [
+        "react"
+    ]
+}
