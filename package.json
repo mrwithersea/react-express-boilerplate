@@ -8,6 +8,7 @@
     "clean": "rm -rf build",
     "start": "NODE_PATH=build node --stack_trace_limit=200 build/server",
     "start:dev": "npm run watch:server",
+    "watch:server": "NODE_PATH=src nodemon --stack_trace_limit=200 -w src/server/ -w src/shared/ --ext '.js','.jsx' --require babel-core/register --require dotenv/config src/server/",
     "test": "parallelshell 'npm run test:unit' 'npm run test:integration' 'npm run test:functional'",
     "test:unit": "NODE_PATH=./src mocha 'test/unit/**/*.js' --require babel-core/register --require test/support/global",
     "test:integration": "DEBUG=nock.* NODE_PATH=./src mocha test/integration/* --require babel-core/register --require test/support/global",
@@ -22,13 +23,14 @@
     "body-parser": "^1.15.0",
     "cookie-parser": "^1.4.1",
     "express": "4.13.4",
+    "express-handlebars": "^3.0.0",
     "lodash": "4.4.0",
     "moment": "^2.12.0",
     "react": "0.14.8",
     "react-dom": "0.14.8",
     "superagent": "1.7.2",
     "uid": "0.0.2",
-    "url": "0.10.0",
+    "url": "0.10.0"
   },
   "devDependencies": {
     "babel-cli": "6.2.0",
