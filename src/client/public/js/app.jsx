@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Page from 'shared/Page';
+import components from 'shared/components';
+import StandardPage from 'shared/templates/StandardPage';
 
 function run() {
-     ReactDOM.render(<Page header={window.headerDefinition} {...window.pageDefinition} />,
-        document.getElementById('js-react-container')
-    );
+
+  const Component = components[window.__STATE__.app];
+
+  ReactDOM.render(<StandardPage><Component { ...window.__STATE__} /></StandardPage>,
+    document.getElementById('js-react-container')
+  );
 }
 
 window.addEventListener('DOMContentLoaded', run, false);
